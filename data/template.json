@@ -1,0 +1,46 @@
+[
+  {
+    "lang": "lang",
+    "translate_to": "lang",
+    "title": "Title of the book",
+    "uuid": "uuid",
+    "data": [
+      {
+        "country": "Country",
+        "recipes": [
+          {
+            "uuid": "uuid",
+            "title": {
+              "data": "Title of the recipe",
+              "modified": 0
+            },
+            "description": {
+              "data": "Description of the food.",
+              "modified": 0
+            },
+            "image": {
+              "uri": "link_to_the_image",
+              "description": {
+                "data": "Image description",
+                "modified": 0
+              }
+            },
+            "serving": "Serving",
+            "preparing_time": "Preparing time",
+            "ingredients": [
+              "List",
+              "of",
+              "Ingredients"
+            ],
+            "directions": {
+              "data": "Directions for recipe",
+              "modified": 0,
+              "appended_to_docs": 0
+            },
+            "done": 0
+          }
+        ]
+      }
+    ]
+  }
+]

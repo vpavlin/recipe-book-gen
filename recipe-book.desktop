@@ -1,0 +1,8 @@
+[Desktop Entry]
+Terminal=false
+Type=Application
+Name=Recipe Book Creator
+Exec=/opt/google/chrome/google-chrome --app=http://localhost:5000
+NoDisplay=true
+StartupWMClass=crx_recipe_book
+Icon=chrome-nglheapbdkhgpidedbaaiohcgmkmilbo-Default

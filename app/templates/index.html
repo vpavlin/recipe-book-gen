@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>{{title}}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <!--
+    {{all}}
+    -->
+
+  </head>
+
+  <body>
+    <input type="hidden" value="e360fbcb-8351-4c20-8473-45675c93d60e" id="master_book_uuid" />
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="main">
+          <h1 class="page-header">States</h1>
+
+          <div class="row placeholders scroll">
+            {% for country in all %}
+            <div class="col-xs-6 col-sm-2 placeholder country-container" id="country-{{sc(country["country"])}}">
+
+              <h4 class="country_name">{{country["country"]}}</h4>
+              {% for recipe in country["recipes"] %}
+                <div class="text-muted recipe-label"><a href="#" class="load_recipe" data-id="{{recipe["uuid"]}}" >{{recipe["title"]}}</a> <span class="delete_recipe" data-id="{{recipe["uuid"]}}">x</span></div>
+              {% endfor %}
+              <span class="text-muted"><a href="#" class="new_recipe" data-country="{{country["country"]}}">New recipe</a></span>
+            </div>
+            {% endfor %}
+            <div class="col-xs-6 col-sm-2 placeholder">
+              <h4><a href="#" data-toggle="modal" data-target="#newCountryModal" id="new_country">New country</a></h4>
+            </div>
+
+          </div>
+
+          <h2 class="sub-header">Recipe form <span id="country_name_header"></span><span id="saved_msg">Saved</span></h2>
+            <form method="post" action="/save_recipe" id="recipe_form">
+              <input type="hidden" id="uuid" val="" />
+              <!--<input type="hidden" id="book_uuid" val="blahblah" />-->
+              <p> Country: <input type="text" disabled="disabled" id="country" val="" /></p>
+              <p> Title: <input type="text" id="title" class="recipe_data" /></p>
+              <p> Description: <textarea id="description" cols="80" rows="5" class="recipe_data"></textarea></p>
+              <p> Image:
+                <div id="image">
+                  <img src='' height='100px' id="image_uri_elem">
+                  <span id="image_desc_elem"></span>
+                  <p>Image URL: <input type='text' value='' id='image_uri' size="50" class='recipe_data' /></p>
+                  <p>Source URL: <input type='text' value='' id='image_source_uri' size="50" class='recipe_data' /></p>
+                  <p>Description: <input type='text' value='' id='image_desc' size="50" class='recipe_data' /></p></div></p>
+              <p> Serving: <input type="text" id="serving" class="recipe_data" /></p>
+              <p> Preparing: <input type="text" id="preparing_time" class="recipe_data" /></p>
+              <p> Ingredients:<textarea id="ingredients" cols="20" rows="10" class="recipe_data"></textarea></p>
+              <p> Directions: <textarea id="directions" cols="80" rows="20" class="recipe_data"></textarea></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- image modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Recipe image</h4>
+      </div>
+      <div class="modal-body">
+        <p>Image URL: <input type="text" id="modal_image_url" /></p>
+        <p>Image Description: <input type="text" id="modal_image_desc" size="20" /></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="image_save" data-dismiss="modal">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- ingredients modal -->
+<div class="modal fade" id="ingredientsModal" tabindex="-1" role="dialog" aria-labelledby="ingredientsModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Recipe ingredients</h4>
+      </div>
+      <div class="modal-body">
+        <textarea id="modal_ingredients" cols="50" rows="15" /></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="ingredients_save" data-dismiss="modal">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- new country modal -->
+<div class="modal fade" id="newCountryModal" tabindex="-1" role="dialog" aria-labelledby="newCountryModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">New country</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="modal_new_country" size="50" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="new_country_save" data-dismiss="modal">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/script.js"></script>
+  </body>
+</html>
