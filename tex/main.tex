@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{ragged2e}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+\usepackage{verse}
+\usepackage{setspace}
+\usepackage{etoolbox}
+\usepackage{hyphenat}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=false,
+    pdfborder={0 0 0}
+}
+\usepackage{indentfirst}
+\hyphenpenalty10000
+\AtBeginEnvironment{verse}{\linespread{1.2}}
+
+\usepackage{eso-pic}
+\newcommand\BackgroundPic{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=\paperwidth,height=\paperheight,%
+keepaspectratio]{../output.png}%
+\vfill
+}}}
+
+\begin{document}
+  \AddToShipoutPicture*{\BackgroundPic}
+\begin{titlepage}
+  \centering
+
+\topskip0pt
+\vspace*{\fill}
+\Huge{The Most Favourite Recipes}\par
+\LARGE{Accross the states of the USA}
+\vspace*{\fill}
+
+\end{titlepage}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\rfoot{Page \thepage}
+
+\setlength{\parskip}{0.2cm plus4mm minus3mm}
+\setlength{\parindent}{0pt}
+\newpage
+$PAGE
+
+
+
+
+
+\end{document}

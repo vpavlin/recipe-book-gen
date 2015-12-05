@@ -1,0 +1,51 @@
+\rhead{\Large{$country}}
+\lhead{}
+
+\begin{multicols}{2}
+\begin{center}
+\Huge{\textbf{$title}}
+\end{center}
+
+\normalsize
+\justify
+$description
+
+\columnbreak
+    \begin{center}
+        \href{$image_source_uri}{\includegraphics[height=5cm]{$image_uri}}
+    \end{center}
+
+\end{multicols}
+
+\large
+\begin{multicols}{2}
+    \begin{center}
+        \textbf{Servings:} $serving
+    \end{center}
+\columnbreak
+    \begin{center}
+        \textbf{Total time:} $preparing_time minutes
+    \end{center}
+\end{multicols}
+%\vfill
+
+\setlength{\parindent}{0pt}
+\Large{\textbf{Ingredients:}}
+\vspace{-0.6em}
+\begin{multicols}{2}[]
+\setlength{\multicolsep}{1pt}
+\setlength{\vindent}{8pt}
+\begin{verse}
+\small
+$ingredients
+\end{verse}
+\end{multicols}
+
+%\vfill
+
+\Large{\textbf{Directions:}}
+\large
+\justify
+
+\setlength{\parindent}{0pt}
+$directions

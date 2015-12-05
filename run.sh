@@ -2,7 +2,7 @@
 
 IMAGE="recipe-book"
 NAME="recipe-book"
-FROM="/home/$USER/Dropbox/recipe-book"
+FROM="/home/$USER/Dropbox/recipe-book/test"
 
 exist=$(docker images -q $IMAGE)
 if [ "$exist" == "" ]; then

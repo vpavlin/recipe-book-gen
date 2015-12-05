@@ -64,7 +64,12 @@ class DataStorage(object):
         except:
             pass
 
+    def get_countries_content(self, book_uuid):
+        for book in self.content:
+            if book["uuid"] == book_uuid:
+                return copy.deepcopy(book["data"])
 
+        return None
 
     def find_recipe(self, uuid):
         for book in self.content:
