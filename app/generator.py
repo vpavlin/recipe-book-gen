@@ -84,7 +84,7 @@ class Generator(object):
 
     def call_cmd(self, path, cmd=None):
         if not cmd:
-            cmd = [self.gen_cmd, "-output-directory=tex/", "-halt-on-error", "-interaction=nonstopmode",  path]
+            cmd = [self.gen_cmd, "-output-directory=tex/", "-interaction=nonstopmode",  path]
         print("Calling %s" % " ".join(cmd))
         subprocess.call(cmd)
 
@@ -140,19 +140,20 @@ class Generator(object):
         page_num = 1
         for country in content:
             data = {}
-            data["country"] = country["country"]
+
             i = 0
             for recipe in country["recipes"]:
                 #if page_num <75 or page_num > 85:
                 #    page_num += 1
                 #    continue
                     #break
-                self.state = States.PAGES_PREP % (page_num, data["country"])
+                self.state = States.PAGES_PREP % (page_num, country["country"])
                 print(self.state)
 
 
                 data.update(recipe)
-                data["image_uri"] = self.download_image(recipe["image"]["uri"], "%s%d.jpg" % (data["country"], i))
+                data["country"] = self.prep_country(country["country"], i)
+                data["image_uri"] = self.download_image(recipe["image"]["uri"], "%s%d.jpg" % (country["country"], i))
                 data["image_source_uri"] = recipe["image"]["source_uri"]
                 data["ingredients"] = self.prep_ingredients(recipe["ingredients"])
                 data["directions"] = self.prep_directions(recipe["directions"])
@@ -179,6 +180,12 @@ class Generator(object):
             tmp = str(data.encode('utf-8')) #data.decode("utf-8")
 
         return tmp
+
+    def prep_country(self, country, i):
+        if i == 0:
+            return "\section{%s}" % country
+        else:
+            return "\Large{%s}" % country
 
     def prep_ingredients(self, ingredients):
         result = []

@@ -1,7 +1,9 @@
 FROM fedora
 
-RUN dnf -y install python-flask
-RUN dnf -y install python-requests
+RUN dnf -y install python-flask python-requests
+RUN dnf -y install texlive-verse texlive-setspace texlive-etoolbox texlive-titlesec texlive-tocloft texlive-tcolorbox texlive-eso-pic
+RUN dnf -y install texlive texlive-latex
+RUN dnf -y install texlive-wrapfig texlive-hyphenat
 EXPOSE 5000
 
 ADD . /opt/recipe-book

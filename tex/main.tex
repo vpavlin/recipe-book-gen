@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
@@ -12,6 +12,11 @@
 \usepackage{setspace}
 \usepackage{etoolbox}
 \usepackage{hyphenat}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage[many]{tcolorbox}
+\usepackage{lmodern}
+%\usepackage{fix-cm}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=false,
@@ -27,10 +32,46 @@
 \parbox[b][\paperheight]{\paperwidth}{%
 \vfill
 \centering
-\includegraphics[width=\paperwidth,height=\paperheight,%
-keepaspectratio]{../output.png}%
+\includegraphics[height=\paperheight]{./title.pdf}%
 \vfill
 }}}
+
+\newtcolorbox{mybox}[1][]{
+    width=\textwidth,
+    arc=2mm,
+%    auto outer arc,
+    boxsep=0cm,
+    toprule=1pt,
+    leftrule=1pt,
+    bottomrule=1pt,
+    rightrule=1pt,
+    colframe=blue,
+    fontupper=\center\fontsize{60pt}{46pt}\itshape,
+    breakable,
+    nobeforeafter,
+    enhanced jigsaw,
+    opacityframe=0.5,
+    opacityback=0.3
+}
+\makeatletter
+\newcommand\HUGE{\@setfontsize\Huge{90}{65}}
+\newcommand\SUBTITLE{\@setfontsize\Huge{40}{50}}
+\makeatother
+
+%\sectionfont{\Large}
+%\subsectionfont{\huge}
+\titlespacing*{\section}
+  {0pt}{0pt}{-13pt}
+\titlespacing*{\subsection}
+    {0pt}{0pt}{0pt}
+\titleformat{\section}[block]
+        {\Large\filleft}{}{}{}
+\titleformat{\subsection}[block]
+    {\Huge\bfseries\filcenter}{}{0pt}{}
+
+\setcounter{secnumdepth}{0}
+\addtocontents{toc}{\cftpagenumbersoff{section}}
+\pagenumbering{arabic}
 
 \begin{document}
   \AddToShipoutPicture*{\BackgroundPic}
@@ -38,25 +79,32 @@ keepaspectratio]{../output.png}%
   \centering
 
 \topskip0pt
+\vspace*{2.75cm}
+\begin{mybox}[]
+\color{white}{
+\HUGE{\textbf{The Most Favourite Recipes}}\par
+\SUBTITLE{\textbf{Accross the states of the USA}}
+}
+\end{mybox}
+\begin{picture}(0,0) \put(-343,-155){\hbox{\includegraphics[scale=0.3]{./bubble.pdf}}} \end{picture}
 \vspace*{\fill}
-\Huge{The Most Favourite Recipes}\par
-\LARGE{Accross the states of the USA}
-\vspace*{\fill}
-
 \end{titlepage}
+
+
 
 \pagestyle{fancy}
 \fancyhf{}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
 
-\rfoot{Page \thepage}
+\tableofcontents
 
 \setlength{\parskip}{0.2cm plus4mm minus3mm}
 \setlength{\parindent}{0pt}
 \newpage
+\renewcommand{\headrulewidth}{0.5pt}
+
 $PAGE
-
-
-
 
 
 \end{document}
