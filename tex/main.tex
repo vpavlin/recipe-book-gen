@@ -56,6 +56,8 @@
 \makeatletter
 \newcommand\HUGE{\@setfontsize\Huge{90}{65}}
 \newcommand\SUBTITLE{\@setfontsize\Huge{40}{50}}
+% Invisible sections
+\newcommand\none{\fontsize{0.01}{0.01}\selectfont}
 \makeatother
 
 %\sectionfont{\Large}
@@ -65,7 +67,7 @@
 \titlespacing*{\subsection}
     {0pt}{0pt}{0pt}
 \titleformat{\section}[block]
-        {\Large\filleft}{}{}{}
+        {\none}{}{0pt}{}
 \titleformat{\subsection}[block]
     {\Huge\bfseries\filcenter}{}{0pt}{}
 
@@ -90,7 +92,8 @@
 \vspace*{\fill}
 \end{titlepage}
 
-
+% Prevent page breaks for sections in TOV
+\setlength{\cftbeforesecskip}{1.0em plus 0.5em minus 0.5em}
 
 \pagestyle{fancy}
 \fancyhf{}

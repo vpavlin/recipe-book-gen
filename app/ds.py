@@ -100,11 +100,15 @@ class DataStorage(object):
                         del(tmp["book_uuid"])
                         del(tmp["country"])
                         print(to_update)
+                        insert_to = None
                         if to_update:
                             new = False
+                            insert_to = country['recipes'].index(to_update)
                             country["recipes"].remove(to_update)
-
-                        country["recipes"].append(tmp)
+                        if insert_to != None:
+                            country["recipes"].insert(insert_to, tmp)
+                        else:
+                            country["recipes"].append(tmp)
                         return new
         return False
 

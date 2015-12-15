@@ -115,8 +115,8 @@ class Generator(object):
         path = os.path.join("tex/images", image_name).replace(" ","-").lower()
 
         #urllib.urlretrieve(image_uri, path)
-        myopener = MyOpener()
-        myopener.retrieve(image_uri, path)
+        #myopener = MyOpener()
+        #myopener.retrieve(image_uri, path)
         #resource = urllib.urlopen(image_uri)
         #with open(path, "wb") as fp:
             #fp.write(resource.read())
@@ -152,7 +152,8 @@ class Generator(object):
 
 
                 data.update(recipe)
-                data["country"] = self.prep_country(country["country"], i)
+                data["country"] = self.replace_symbols(country["country"])
+                data["country_title"] = self.prep_country(country["country"], i)
                 data["image_uri"] = self.download_image(recipe["image"]["uri"], "%s%d.jpg" % (country["country"], i))
                 data["image_source_uri"] = recipe["image"]["source_uri"]
                 data["ingredients"] = self.prep_ingredients(recipe["ingredients"])
@@ -185,7 +186,7 @@ class Generator(object):
         if i == 0:
             return "\section{%s}" % country
         else:
-            return "\Large{%s}" % country
+            return ""
 
     def prep_ingredients(self, ingredients):
         result = []
